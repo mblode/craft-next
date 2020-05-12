@@ -1,0 +1,192 @@
+dateModified: 1589326237
+email:
+  fromEmail: m@blode.co
+  fromName: 'Craft Next'
+  transportType: craft\mail\transportadapters\Sendmail
+fieldGroups:
+  9c26f779-22fc-48af-8328-327fc2c639ba:
+    name: Common
+fields:
+  7c9c4bd0-44ed-4afe-b4c6-178d73a03fe7:
+    contentColumnType: string
+    fieldGroup: 9c26f779-22fc-48af-8328-327fc2c639ba
+    handle: coverImage
+    instructions: ''
+    name: 'Cover Image'
+    searchable: true
+    settings:
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:3ef5f951-05ba-4267-a97d-afae98a24a6b'
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      restrictFiles: ''
+      selectionLabel: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:3ef5f951-05ba-4267-a97d-afae98a24a6b'
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: ''
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  af58f8a6-cd44-4339-bfcc-71661a97199e:
+    contentColumnType: text
+    fieldGroup: 9c26f779-22fc-48af-8328-327fc2c639ba
+    handle: richText
+    instructions: ''
+    name: 'Rich Text'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: true
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+graphql:
+  schemas:
+    9d086577-fd26-4357-92f6-fc095c95a813:
+      isPublic: '0'
+      name: Next
+      scope:
+        - 'sections.2aca9c56-148c-451f-b9b9-357cd30aeb37:read'
+        - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:read'
+        - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:read'
+        - 'usergroups.everyone:read'
+        - 'sections.2aca9c56-148c-451f-b9b9-357cd30aeb37:edit'
+        - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:edit'
+        - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:create'
+        - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:save'
+        - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:delete'
+        - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:edit'
+        - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:create'
+        - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:save'
+        - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:delete'
+    a91d7b6e-5068-4fd5-9b07-71ecaf0b486f:
+      isPublic: '1'
+      name: 'Public Schema'
+      scope: null
+imageTransforms:
+  cfb95aae-fc4a-4a7f-a44f-692008d707d1:
+    format: null
+    handle: thumb
+    height: 600
+    interlace: none
+    mode: crop
+    name: Thumb
+    position: center-center
+    quality: null
+    width: 600
+plugins:
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+sections:
+  2aca9c56-148c-451f-b9b9-357cd30aeb37:
+    enableVersioning: true
+    entryTypes:
+      7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:
+        fieldLayouts:
+          e8b55eb7-4a20-4084-8879-e7752f56d101:
+            tabs:
+              -
+                fields:
+                  7c9c4bd0-44ed-4afe-b4c6-178d73a03fe7:
+                    required: false
+                    sortOrder: 1
+                  af58f8a6-cd44-4339-bfcc-71661a97199e:
+                    required: false
+                    sortOrder: 2
+                name: Common
+                sortOrder: 1
+        handle: blog
+        hasTitleField: true
+        name: Blog
+        sortOrder: 1
+        titleFormat: ''
+        titleLabel: Title
+    handle: blog
+    name: Blog
+    previewTargets:
+      -
+        __assoc__:
+          -
+            - label
+            - 'Primary entry page'
+          -
+            - urlFormat
+            - '{url}'
+          -
+            - refresh
+            - '1'
+      -
+        __assoc__:
+          -
+            - label
+            - Next.js
+          -
+            - urlFormat
+            - 'http://localhost:3000/api/preview?slug={slug}'
+          -
+            - refresh
+            - '1'
+    propagationMethod: all
+    siteSettings:
+      9972b67f-0e2d-4ff8-9653-a8985a6e679f:
+        enabledByDefault: true
+        hasUrls: true
+        template: null
+        uriFormat: 'blog/{slug}'
+    type: channel
+siteGroups:
+  27097cb2-b3d1-4c20-86e8-4b581f71c2ba:
+    name: 'Craft Next'
+sites:
+  9972b67f-0e2d-4ff8-9653-a8985a6e679f:
+    baseUrl: 'http://localhost:3000'
+    enabled: true
+    handle: default
+    hasUrls: true
+    language: en-AU
+    name: 'Craft Next'
+    primary: true
+    siteGroup: 27097cb2-b3d1-4c20-86e8-4b581f71c2ba
+    sortOrder: 1
+system:
+  edition: pro
+  live: true
+  name: 'Craft Next'
+  schemaVersion: 3.5.0
+  timeZone: Australia/Melbourne
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: ''
+  photoVolumeUid: null
+  requireEmailVerification: true
+volumes:
+  3ef5f951-05ba-4267-a97d-afae98a24a6b:
+    handle: general
+    hasUrls: true
+    name: General
+    settings:
+      path: uploads/general
+    sortOrder: 1
+    type: craft\volumes\Local
+    url: '@web/uploads/general'
