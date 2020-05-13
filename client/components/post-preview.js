@@ -11,7 +11,9 @@ export default function PostPreview({ title, coverImage, date, richText, slug })
     return (
         <div>
             <div className='mb-5'>
-                <CoverImage title={coverImage.title} slug={slug} url={coverImage.url} />
+                {coverImage.length > 0 && (
+                    <CoverImage title={coverImage[0].title} slug={slug} url={coverImage[0].url} />
+                )}
             </div>
             <h3 className='text-3xl mb-3 leading-snug'>
                 <Link as={`/blog/${slug}`} href='/blog/[slug]'>

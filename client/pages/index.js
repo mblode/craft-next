@@ -20,7 +20,7 @@ export default function Index({ allPosts }) {
                     {heroPost && (
                         <HeroPost
                             title={heroPost.title}
-                            coverImage={heroPost.coverImage[0]}
+                            coverImage={heroPost.coverImage}
                             date={heroPost.date}
                             slug={heroPost.slug}
                             richText={heroPost.richText}

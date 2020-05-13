@@ -1,18 +1,21 @@
 import 'isomorphic-unfetch';
 
-const GRAPHQL_API_URL = process.env.NEXT_CRAFT_API_URL;
+export const API_URL = process.env.NEXT_CRAFT_API_URL;
 export const API_TOKEN = process.env.NEXT_CRAFT_API_TOKEN;
 
-async function fetchAPI(query, { previewToken } = {}) {
-    let craftUrl = GRAPHQL_API_URL;
+async function fetchAPI(query, { previewToken, variables } = {}) {
+    let craftUrl = API_URL;
 
     if (previewToken && previewToken !== '') {
         craftUrl += '?token=' + previewToken;
     }
 
     const res = await fetch(craftUrl, {
-        method: 'post',
-        body: query,
+        method: 'POST',
+        body: JSON.stringify({
+            query,
+            variables,
+        }),
         headers: {
             'Content-Type': 'application/graphql',
             Authorization: `Bearer ${API_TOKEN}`,
@@ -30,6 +33,7 @@ async function fetchAPI(query, { previewToken } = {}) {
         console.error(json.errors);
         throw new Error('Failed to fetch API');
     }
+
     return json.data;
 }
 
@@ -53,6 +57,13 @@ export async function getAllPostsForHome(previewData) {
                 title
                 slug
                 url
+                author {
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
                 ... on blog_blog_Entry {
                     richText
                     coverImage {
@@ -78,6 +89,13 @@ export async function getPostAndMorePosts(slug, previewData) {
                 title
                 slug
                 url
+                author {
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
                 ... on blog_blog_Entry {
                     richText
                     coverImage {
@@ -92,6 +110,13 @@ export async function getPostAndMorePosts(slug, previewData) {
                 title
                 slug
                 url
+                author {
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
                 ... on blog_blog_Entry {
                     richText
                     coverImage {
@@ -104,6 +129,9 @@ export async function getPostAndMorePosts(slug, previewData) {
         `,
         {
             previewData,
+            variables: {
+                slug,
+            },
         }
     );
 
@@ -120,8 +148,47 @@ export async function getPostBySlug(slug) {
                 url
             }
         }
-        `
+        `,
+        {
+            previewData,
+            variables: {
+                slug,
+            },
+        }
     );
+
+    return data.post;
+}
+
+export async function saveEntry(title) {
+    console.log(title);
+
+    const data = await fetchAPI(
+        `
+        mutation saveEntry($title: String) {
+            post: save_blog_blog_Entry(title: "mutate", authorId: 1, enabled: false) {
+                dateCreated @formatDateTime (format: "Y-m-d")
+                title
+                slug
+                url
+                author {
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
+            }
+        }
+        `,
+        {
+            variables: {
+                title,
+            },
+        }
+    );
+
+    console.log(data.post);
 
     return data.post;
 }

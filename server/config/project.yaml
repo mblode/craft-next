@@ -1,4 +1,4 @@
-dateModified: 1589326237
+dateModified: 1589342273
 email:
   fromEmail: m@blode.co
   fromName: 'Craft Next'
@@ -67,6 +67,7 @@ graphql:
         - 'sections.2aca9c56-148c-451f-b9b9-357cd30aeb37:read'
         - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:read'
         - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:read'
+        - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:read'
         - 'usergroups.everyone:read'
         - 'sections.2aca9c56-148c-451f-b9b9-357cd30aeb37:edit'
         - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:edit'
@@ -77,6 +78,10 @@ graphql:
         - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:create'
         - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:save'
         - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:delete'
+        - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:edit'
+        - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:create'
+        - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:save'
+        - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:delete'
     a91d7b6e-5068-4fd5-9b07-71ecaf0b486f:
       isPublic: '1'
       name: 'Public Schema'
@@ -176,11 +181,21 @@ system:
   timeZone: Australia/Melbourne
 users:
   allowPublicRegistration: false
-  defaultGroup: null
-  photoSubpath: ''
-  photoVolumeUid: null
+  defaultGroup: ''
+  photoSubpath: '{username}'
+  photoVolumeUid: 0f860aad-db78-4809-b5d3-2175ac946d86
   requireEmailVerification: true
+  suspendByDefault: false
 volumes:
+  0f860aad-db78-4809-b5d3-2175ac946d86:
+    handle: user
+    hasUrls: true
+    name: User
+    settings:
+      path: uploads/user
+    sortOrder: 2
+    type: craft\volumes\Local
+    url: '@web/uploads/user'
   3ef5f951-05ba-4267-a97d-afae98a24a6b:
     handle: general
     hasUrls: true

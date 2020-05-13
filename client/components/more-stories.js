@@ -9,7 +9,7 @@ export default function MoreStories({ posts }) {
                     <PostPreview
                         key={node.slug}
                         title={node.title}
-                        coverImage={node.coverImage[0]}
+                        coverImage={node.coverImage}
                         date={node.date}
                         slug={node.slug}
                         richText={node.richText}

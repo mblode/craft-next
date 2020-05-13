@@ -11,7 +11,7 @@ export default function HeroPost({ title, coverImage, date, richText, slug }) {
     return (
         <section>
             <div className='mb-8 md:mb-16'>
-                <CoverImage title={coverImage.title} slug={slug} url={coverImage.url} />
+                {coverImage.length > 0 && <CoverImage title={coverImage[0].title} slug={slug} url={coverImage[0].url} />}
             </div>
             <div className='md:grid md:grid-cols-2 md:col-gap-16 lg:col-gap-8 mb-20 md:mb-28'>
                 <div>

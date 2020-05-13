@@ -28,15 +28,17 @@ export default function Post({ post, morePosts }) {
                         <article>
                             <Head>
                                 <title>{post.title} | Craft Next</title>
-                                <meta property='og:image' content={post.coverImage[0].url} />
+                                {post.coverImage.length > 0 && (
+                                    <meta property='og:image' content={post.coverImage[0].url} />
+                                )}
                             </Head>
                             <PostHeader
                                 title={post.title}
-                                coverImage={post.coverImage[0]}
+                                coverImage={post.coverImage}
                                 date={post.date}
                                 author={post.author}
                             />
-                            <PostBody content={post.content} />
+                            <PostBody content={post.richText} />
                         </article>
                         <SectionSeparator />
                         {morePosts && morePosts.length > 0 && <MoreStories posts={morePosts} />}

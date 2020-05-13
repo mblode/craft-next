@@ -8,14 +8,14 @@ export default function PostHeader({ title, coverImage, date, author }) {
         <>
             <PostTitle>{title}</PostTitle>
             <div className='hidden md:block md:mb-12'>
-                {author && <Avatar name={author.name} picture={author.picture} />}
+                {author && <Avatar fullName={author.fullName} photo={author.photo} />}
             </div>
             <div className='mb-8 md:mb-16 -mx-5 sm:mx-0'>
-                <CoverImage title={coverImage.title} url={coverImage.url} />
+                {coverImage.length > 0 && <CoverImage title={coverImage[0].title} url={coverImage[0].url} />}
             </div>
             <div className='max-w-2xl mx-auto'>
                 <div className='block md:hidden mb-6'>
-                    {author && <Avatar name={author.name} picture={author.picture} />}
+                    {author && <Avatar fullName={author.fullName} photo={author.photo} />}
                 </div>
                 <div className='mb-6 text-lg'>
                     <Date dateString={date} />
