@@ -7,7 +7,7 @@ function createMarkup(text) {
     return { __html: text };
 }
 
-export default function HeroPost({ title, coverImage, date, richText, slug }) {
+export default function HeroPost({ title, coverImage, date, richText, slug, author }) {
     return (
         <section>
             <div className='mb-8 md:mb-16'>
