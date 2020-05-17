@@ -1,12 +1,3 @@
 {
-  "env": {
-    "NEXT_CRAFT_API_TOKEN": "@next_craft_api_token",
-    "NEXT_CRAFT_API_URL": "@next_craft_api_url"
-  },
-  "build": {
-    "env": {
-      "NEXT_CRAFT_API_TOKEN": "@next_craft_api_token",
-      "NEXT_CRAFT_API_URL": "@next_craft_api_url"
-    }
-  }
+
 }
