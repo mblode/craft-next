@@ -1,4 +1,27 @@
-dateModified: 1589342273
+categoryGroups:
+  43574602-3fbc-4f12-97a2-cc4eb7b908c8:
+    handle: blogTag
+    name: 'Blog Tag'
+    siteSettings:
+      9972b67f-0e2d-4ff8-9653-a8985a6e679f:
+        hasUrls: true
+        template: null
+        uriFormat: 'type/{slug}'
+    structure:
+      maxLevels: 1
+      uid: 59171c8a-fa7d-4527-8ada-925ff2351dec
+  79e7ff00-9fee-4cd5-b77f-ec169f95adcd:
+    handle: countryTag
+    name: 'Country Tag'
+    siteSettings:
+      9972b67f-0e2d-4ff8-9653-a8985a6e679f:
+        hasUrls: true
+        template: null
+        uriFormat: 'country-tag/{slug}'
+    structure:
+      maxLevels: 1
+      uid: 3b0d3aa7-7c00-432b-9f29-68219569b60a
+dateModified: 1589457464
 email:
   fromEmail: m@blode.co
   fromName: 'Craft Next'
@@ -7,6 +30,50 @@ fieldGroups:
   9c26f779-22fc-48af-8328-327fc2c639ba:
     name: Common
 fields:
+  5074c4eb-4201-4ab7-97c5-850a8467badc:
+    contentColumnType: string
+    fieldGroup: 9c26f779-22fc-48af-8328-327fc2c639ba
+    handle: countryTag
+    instructions: ''
+    name: 'Country Tag'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      source: 'group:79e7ff00-9fee-4cd5-b77f-ec169f95adcd'
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: ''
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  77e94f02-9da0-4f57-87eb-dd1d2df6268f:
+    contentColumnType: string
+    fieldGroup: 9c26f779-22fc-48af-8328-327fc2c639ba
+    handle: blogTag
+    instructions: ''
+    name: 'Blog Tag'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      source: 'group:43574602-3fbc-4f12-97a2-cc4eb7b908c8'
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: ''
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
   7c9c4bd0-44ed-4afe-b4c6-178d73a03fe7:
     contentColumnType: string
     fieldGroup: 9c26f779-22fc-48af-8328-327fc2c639ba
@@ -69,6 +136,9 @@ graphql:
         - 'volumes.3ef5f951-05ba-4267-a97d-afae98a24a6b:read'
         - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:read'
         - 'usergroups.everyone:read'
+        - 'usergroups.8eccd058-80f7-41d7-977b-fe95a6b8cd53:read'
+        - 'categorygroups.43574602-3fbc-4f12-97a2-cc4eb7b908c8:read'
+        - 'categorygroups.79e7ff00-9fee-4cd5-b77f-ec169f95adcd:read'
         - 'sections.2aca9c56-148c-451f-b9b9-357cd30aeb37:edit'
         - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:edit'
         - 'entrytypes.7974dfb3-a4bf-4014-be9b-3f0128ef0ef8:create'
@@ -82,6 +152,12 @@ graphql:
         - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:create'
         - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:save'
         - 'volumes.0f860aad-db78-4809-b5d3-2175ac946d86:delete'
+        - 'categorygroups.43574602-3fbc-4f12-97a2-cc4eb7b908c8:edit'
+        - 'categorygroups.43574602-3fbc-4f12-97a2-cc4eb7b908c8:save'
+        - 'categorygroups.43574602-3fbc-4f12-97a2-cc4eb7b908c8:delete'
+        - 'categorygroups.79e7ff00-9fee-4cd5-b77f-ec169f95adcd:edit'
+        - 'categorygroups.79e7ff00-9fee-4cd5-b77f-ec169f95adcd:save'
+        - 'categorygroups.79e7ff00-9fee-4cd5-b77f-ec169f95adcd:delete'
     a91d7b6e-5068-4fd5-9b07-71ecaf0b486f:
       isPublic: '1'
       name: 'Public Schema'
@@ -112,6 +188,12 @@ sections:
             tabs:
               -
                 fields:
+                  5074c4eb-4201-4ab7-97c5-850a8467badc:
+                    required: false
+                    sortOrder: 4
+                  77e94f02-9da0-4f57-87eb-dd1d2df6268f:
+                    required: false
+                    sortOrder: 3
                   7c9c4bd0-44ed-4afe-b4c6-178d73a03fe7:
                     required: false
                     sortOrder: 1
@@ -129,18 +211,7 @@ sections:
     handle: blog
     name: Blog
     previewTargets:
-      -
-        __assoc__:
-          -
-            - label
-            - 'Primary entry page'
-          -
-            - urlFormat
-            - '{url}'
-          -
-            - refresh
-            - '1'
-      -
+      1:
         __assoc__:
           -
             - label
@@ -180,8 +251,12 @@ system:
   schemaVersion: 3.5.0
   timeZone: Australia/Melbourne
 users:
-  allowPublicRegistration: false
-  defaultGroup: ''
+  allowPublicRegistration: true
+  defaultGroup: 8eccd058-80f7-41d7-977b-fe95a6b8cd53
+  groups:
+    8eccd058-80f7-41d7-977b-fe95a6b8cd53:
+      handle: members
+      name: Members
   photoSubpath: '{username}'
   photoVolumeUid: 0f860aad-db78-4809-b5d3-2175ac946d86
   requireEmailVerification: true

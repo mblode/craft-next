@@ -15,8 +15,6 @@ export default function Create() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const post = await saveEntry(contact.title);
-
-        console.log(post);
     };
 
     return (
@@ -26,15 +24,10 @@ export default function Create() {
                     <title>Create a new entry</title>
                 </Head>
                 <Container>
-                    <form onSubmit={handleSubmit} action='http://localhost:3000/api' method='post'>
+                    <form onSubmit={handleSubmit}>
                         <div>
                             <label>Title:</label>
                             <input name='title' type='text' onChange={handleChange} />
-                        </div>
-
-                        <div>
-                            <label>Slug:</label>
-                            <input name='slug' type='text' onChange={handleChange} />
                         </div>
 
                         <button type='submit'>Submit</button>

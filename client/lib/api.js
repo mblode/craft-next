@@ -1,13 +1,11 @@
-import 'isomorphic-unfetch';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
-export const API_URL = process.env.NEXT_CRAFT_API_URL;
-export const API_TOKEN = process.env.NEXT_CRAFT_API_TOKEN;
-
-async function fetchAPI(query, { previewToken, variables } = {}) {
+async function fetchAPI(query, { previewData, variables } = {}) {
     let craftUrl = API_URL;
 
-    if (previewToken && previewToken !== '') {
-        craftUrl += '?token=' + previewToken;
+    if (previewData && previewData !== '') {
+        craftUrl += '?token=' + previewData;
     }
 
     const res = await fetch(craftUrl, {
@@ -17,7 +15,7 @@ async function fetchAPI(query, { previewToken, variables } = {}) {
             variables,
         }),
         headers: {
-            'Content-Type': 'application/graphql',
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${API_TOKEN}`,
         },
     });
@@ -28,6 +26,8 @@ async function fetchAPI(query, { previewToken, variables } = {}) {
     }
 
     const json = await res.json();
+
+    console.log(json.data);
 
     if (json.errors) {
         console.error(json.errors);
@@ -48,6 +48,23 @@ export async function getAllPostsWithSlug() {
     return data.entries;
 }
 
+export async function getAllAuthorsWithUsername() {
+    const data = await fetchAPI(`
+        {
+            users {
+                id
+                username
+                fullName
+                photo {
+                    title
+                    url @transform (handle: "thumb")
+                }
+            }
+        }
+    `);
+    return data.users;
+}
+
 export async function getAllPostsForHome(previewData) {
     const data = await fetchAPI(
         `
@@ -58,6 +75,7 @@ export async function getAllPostsForHome(previewData) {
                 slug
                 url
                 author {
+                    username
                     fullName
                     photo {
                         title
@@ -80,6 +98,26 @@ export async function getAllPostsForHome(previewData) {
     return data.entries;
 }
 
+export async function getAllCategories() {
+    const data = await fetchAPI(
+        `
+        {
+            blog: categories(group: "blogTag") {
+                title
+                id
+            }
+
+            countries: categories(group: "countryTag") {
+                title
+                id
+            }
+        }
+        `
+    );
+
+    return data;
+}
+
 export async function getPostAndMorePosts(slug, previewData) {
     const data = await fetchAPI(
         `
@@ -90,6 +128,7 @@ export async function getPostAndMorePosts(slug, previewData) {
                 slug
                 url
                 author {
+                    username
                     fullName
                     photo {
                         title
@@ -111,6 +150,7 @@ export async function getPostAndMorePosts(slug, previewData) {
                 slug
                 url
                 author {
+                    username
                     fullName
                     photo {
                         title
@@ -140,6 +180,71 @@ export async function getPostAndMorePosts(slug, previewData) {
     return data;
 }
 
+export async function searchEntries(variables) {
+    const data = await fetchAPI(
+        `
+        query($query: String, $id: [Int]) {
+            entries (search: $query, relatedToAll: $id) {
+                dateCreated @formatDateTime (format: "Y-m-d")
+                title
+                slug
+                url
+                author {
+                    username
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
+            }
+        }
+        `,
+        {
+            variables,
+        }
+    );
+
+    return data.entries;
+}
+
+export async function getAuthorPosts(id) {
+    const data = await fetchAPI(
+        `
+        query($id: [QueryArgument]) {
+            entries (authorId: $id) {
+                dateCreated @formatDateTime (format: "Y-m-d")
+                title
+                slug
+                url
+                author {
+                    username
+                    fullName
+                    photo {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
+                ... on blog_blog_Entry {
+                    richText
+                    coverImage {
+                        title
+                        url @transform (handle: "thumb")
+                    }
+                }
+            }
+        }
+        `,
+        {
+            variables: {
+                id,
+            },
+        }
+    );
+
+    return data.entries;
+}
+
 export async function getPostBySlug(slug) {
     const data = await fetchAPI(
         `
@@ -150,7 +255,6 @@ export async function getPostBySlug(slug) {
         }
         `,
         {
-            previewData,
             variables: {
                 slug,
             },
@@ -161,17 +265,16 @@ export async function getPostBySlug(slug) {
 }
 
 export async function saveEntry(title) {
-    console.log(title);
-
     const data = await fetchAPI(
         `
         mutation saveEntry($title: String) {
-            post: save_blog_blog_Entry(title: "mutate", authorId: 1, enabled: false) {
+            post: save_blog_blog_Entry(title: $title, authorId: 1, enabled: true) {
                 dateCreated @formatDateTime (format: "Y-m-d")
                 title
                 slug
                 url
                 author {
+                    username
                     fullName
                     photo {
                         title
@@ -187,8 +290,6 @@ export async function saveEntry(title) {
             },
         }
     );
-
-    console.log(data.post);
 
     return data.post;
 }

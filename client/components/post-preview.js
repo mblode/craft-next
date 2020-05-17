@@ -7,11 +7,11 @@ function createMarkup(text) {
     return { __html: text };
 }
 
-export default function PostPreview({ title, coverImage, date, richText, slug }) {
+export default function PostPreview({ title, coverImage, date, richText, slug, author }) {
     return (
         <div>
             <div className='mb-5'>
-                {coverImage.length > 0 && (
+                {coverImage && coverImage.length > 0 && (
                     <CoverImage title={coverImage[0].title} slug={slug} url={coverImage[0].url} />
                 )}
             </div>
@@ -24,6 +24,7 @@ export default function PostPreview({ title, coverImage, date, richText, slug })
                 <Date dateString={date} />
             </div>
             <div dangerouslySetInnerHTML={createMarkup(richText)} className='text-lg leading-relaxed mb-4' />
+            {author && <Avatar author={author} />}
         </div>
     );
 }

@@ -37,6 +37,8 @@ export async function getStaticProps(context) {
     const allPosts = await getAllPostsForHome(context.preview ? context.previewData?.previewToken : undefined);
 
     return {
-        props: { allPosts },
+        props: {
+            allPosts,
+        },
     };
 }
