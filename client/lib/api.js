@@ -261,33 +261,3 @@ export async function getPostBySlug(slug) {
 
     return data.post;
 }
-
-export async function saveEntry(title) {
-    const data = await fetchAPI(
-        `
-        mutation saveEntry($title: String) {
-            post: save_blog_blog_Entry(title: $title, authorId: 1, enabled: true) {
-                dateCreated @formatDateTime (format: "Y-m-d")
-                title
-                slug
-                url
-                author {
-                    username
-                    fullName
-                    photo {
-                        title
-                        url @transform (handle: "thumb")
-                    }
-                }
-            }
-        }
-        `,
-        {
-            variables: {
-                title,
-            },
-        }
-    );
-
-    return data.post;
-}
