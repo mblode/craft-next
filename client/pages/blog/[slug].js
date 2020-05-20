@@ -38,7 +38,7 @@ export default function Post({ post, morePosts }) {
                                 date={post.date}
                                 author={post.author}
                             />
-                            <PostBody content={post.richText} />
+                            <PostBody richText={post.richText} />
                         </article>
                         <SectionSeparator />
                         {morePosts && morePosts.length > 0 && <MoreStories posts={morePosts} />}
