@@ -21,7 +21,7 @@ categoryGroups:
     structure:
       maxLevels: 1
       uid: 3b0d3aa7-7c00-432b-9f29-68219569b60a
-dateModified: 1589757583
+dateModified: 1589976738
 email:
   fromEmail: m@blode.co
   fromName: 'Craft Next'
@@ -178,6 +178,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.3.0
+  webhooks:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.2.0
 sections:
   2aca9c56-148c-451f-b9b9-357cd30aeb37:
     enableVersioning: true
