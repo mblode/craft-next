@@ -46,23 +46,6 @@ export async function getAllPostsWithSlug() {
     return data.entries;
 }
 
-export async function getAllAuthorsWithUsername() {
-    const data = await fetchAPI(`
-        {
-            users {
-                id
-                username
-                fullName
-                photo {
-                    title
-                    url @transform (handle: "thumb")
-                }
-            }
-        }
-    `);
-    return data.users;
-}
-
 export async function getAllPostsForHome(previewData) {
     const data = await fetchAPI(
         `
@@ -200,43 +183,6 @@ export async function searchEntries(variables) {
         `,
         {
             variables,
-        }
-    );
-
-    return data.entries;
-}
-
-export async function getAuthorPosts(id) {
-    const data = await fetchAPI(
-        `
-        query($id: [QueryArgument]) {
-            entries (authorId: $id) {
-                dateCreated @formatDateTime (format: "Y-m-d")
-                title
-                slug
-                url
-                author {
-                    username
-                    fullName
-                    photo {
-                        title
-                        url @transform (handle: "thumb")
-                    }
-                }
-                ... on blog_blog_Entry {
-                    richText
-                    coverImage {
-                        title
-                        url @transform (handle: "thumb")
-                    }
-                }
-            }
-        }
-        `,
-        {
-            variables: {
-                id,
-            },
         }
     );
 
