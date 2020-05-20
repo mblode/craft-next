@@ -21,7 +21,7 @@ categoryGroups:
     structure:
       maxLevels: 1
       uid: 3b0d3aa7-7c00-432b-9f29-68219569b60a
-dateModified: 1589977585
+dateModified: 1589978518
 email:
   fromEmail: m@blode.co
   fromName: 'Craft Next'
@@ -222,7 +222,7 @@ sections:
             - Next.js
           -
             - urlFormat
-            - 'https://vercel.matthewblode.com/api/preview?slug={slug}'
+            - 'https://craft-next.now.sh/api/preview?slug={slug}'
           -
             - refresh
             - '1'
